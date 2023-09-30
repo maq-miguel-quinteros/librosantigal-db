@@ -8,7 +8,7 @@ import java.util.List;
 public interface BookService {
 
     // CREATE
-    void createBook(Book book);
+    void create(Book book);
 
     // READ
     List<BookDTO> readAll();

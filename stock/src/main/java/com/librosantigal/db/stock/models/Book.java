@@ -4,36 +4,44 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GenericGenerator(name = "native")
     private Long id;
     private String isbn;
     private String title;
     private LocalDate date;
     @Lob
     private String synopsis;
+    private int pagesNumber;
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    private Set<BookAuthor> authors = new HashSet<>();
 
     /** atributos a sumar
      * nro paginas, idioma */
 
     public Book() {}
-    public Book(String isbn, String title, LocalDate date ,String synopsis) {
+    public Book(String isbn, String title, LocalDate date ,String synopsis, int pagesNumber) {
         this.isbn = isbn;
         this.title = title;
         this.date = date;
         this.synopsis = synopsis;
+        this.pagesNumber = pagesNumber;
+    }
+
+    public void addBookAuthor(BookAuthor bookAuthor){
+        bookAuthor.setBook(this);
+        authors.add(bookAuthor);
     }
 
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
     public String getIsbn() {
         return isbn;
@@ -58,5 +66,17 @@ public class Book {
     }
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+    public int getPagesNumber() {
+        return pagesNumber;
+    }
+    public void setPagesNumber(int pagesNumber) {
+        this.pagesNumber = pagesNumber;
+    }
+    public Set<BookAuthor> getAuthors() {
+        return authors;
+    }
+    public void setAuthors(Set<BookAuthor> authors) {
+        this.authors = authors;
     }
 }

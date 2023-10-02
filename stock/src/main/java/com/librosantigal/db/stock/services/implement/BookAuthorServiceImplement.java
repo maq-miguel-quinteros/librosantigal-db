@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookAuthorImplement implements BookAuthorService {
+public class BookAuthorServiceImplement implements BookAuthorService {
 
     @Autowired
     BookAuthorRepository bookAuthorRepository;

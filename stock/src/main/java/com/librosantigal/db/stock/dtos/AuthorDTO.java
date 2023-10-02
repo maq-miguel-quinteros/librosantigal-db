@@ -31,5 +31,10 @@ public class AuthorDTO {
     public String getLastName() {
         return lastName;
     }
-
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+    public LocalDate getDeathDate() {
+        return deathDate;
+    }
 }
